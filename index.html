@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista d'Attesa Percorsi | Ossitocina Libera</title>
+  
+  <!-- Google Fonts: Lexend (altissima leggibilità) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-bg': '#feeaeb',
+            'brand-pink': '#f9b4c7',
+            'brand-magenta': '#f60094',
+            'brand-orange': '#ffb010',
+            'brand-orange-dark': '#f19821',
+            'brand-text': '#2d2d2d',
+            'brand-white': '#ffffff'
+          },
+          fontFamily: {
+            sans: ['Lexend', 'sans-serif']
+          },
+          boxShadow: {
+            'pop': '4px 4px 0px 0px rgba(246, 0, 148, 0.15)',
+            'pop-hover': '6px 6px 0px 0px rgba(241, 152, 33, 0.3)',
+            'btn': '0 4px 14px rgba(241, 152, 33, 0.4)'
+          },
+          animation: {
+            'wiggle-slow': 'wiggle 3s ease-in-out infinite',
+            'float': 'float 8s ease-in-out infinite',
+          },
+          keyframes: {
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-2deg)' },
+              '50%': { transform: 'rotate(2deg)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0) scale(1)' },
+              '50%': { transform: 'translateY(-15px) scale(1.02)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/css">
+    body {
+      /* Sfondo solido molto morbido, niente pois */
+      background-color: #fdf5f6;
+      color: #2d2d2d;
+    }
+
+    /* MailerLite Styles & Reset Integration */
+    .ml-form-embedSubmitLoad { display: inline-block; width: 20px; height: 20px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .ml-form-embedSubmitLoad:after { 
+      content: " "; 
+      display: block; 
+      width: 14px; 
+      height: 14px; 
+      margin: 1px; 
+      border-radius: 50%; 
+      border: 3px solid #fff; 
+      border-color: #ffffff #ffffff #ffffff transparent; 
+      animation: ml-form-embedSubmitLoad 1.2s linear infinite; 
+    }
+    @keyframes ml-form-embedSubmitLoad { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* Interactive Radio Card Selected State */
+    .radio-card-label {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .radio-card-input:checked + .radio-card-label {
+      border-color: #f60094;
+      background-color: #fff5fa;
+      box-shadow: 4px 4px 0px 0px rgba(246, 0, 148, 0.15);
+      transform: translateY(-2px);
+    }
+  </style>
+
+  <!-- MailerLite Fonts -->
+  <link rel="stylesheet" href="https://assets.mlcdn.com/fonts.css?version=1788452">
+</head>
+
+<body class="min-h-screen py-6 sm:py-8 px-4 sm:px-6 antialiased relative overflow-x-hidden">
+
+  <!-- Sfondo morbido stile Aurora: forme grandi, lentissime e molto sfocate -->
+  <div class="fixed top-[-10%] left-[-10%] w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] bg-brand-pink rounded-full mix-blend-multiply filter blur-[80px] sm:blur-[120px] opacity-30 animate-float -z-10 pointer-events-none"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[80vw] h-[80vw] max-w-[700px] max-h-[700px] bg-brand-orange rounded-full mix-blend-multiply filter blur-[100px] sm:blur-[150px] opacity-15 animate-float -z-10 pointer-events-none" style="animation-delay: 3s;"></div>
+
+  <div class="max-w-3xl mx-auto relative z-10">
+    
+    <!-- HEADER / HERO -->
+    <header class="text-center pt-6 sm:pt-8 pb-8 sm:pb-10">
+      <div class="inline-block p-2 px-4 sm:px-5 rounded-2xl bg-white text-brand-magenta font-bold text-xs sm:text-sm tracking-wider uppercase mb-6 shadow-pop border-2 border-brand-pink animate-wiggle-slow">
+        ✨ Ossitocina Libera • Percorso Mensile
+      </div>
+      
+      <!-- FOTO IN ALTO -->
+      <div class="mb-6 sm:mb-8 relative max-w-[16rem] sm:max-w-lg mx-auto group px-2 sm:px-0">
+        <div class="absolute -inset-1 bg-gradient-to-r from-brand-orange to-brand-magenta rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"></div>
+        <img 
+          src="https://i.postimg.cc/R0r5fsrK/Chat-GPT-Image-31-ago-2026-17-14-50.jpg" 
+          alt="Annelisa Brunelli - Ossitocina Libera" 
+          class="relative w-full object-cover rounded-3xl border-4 border-white shadow-xl transform transition duration-500 hover:scale-[1.02]"
+        />
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-brand-text mb-4 sm:mb-6 leading-tight px-2">
+        Smetti di sentirti sola.<br>
+        <span class="text-brand-magenta">Ritrova sicurezza.</span>
+      </h1>
+      <p class="text-base sm:text-lg font-medium text-gray-700 leading-relaxed max-w-2xl mx-auto bg-white/90 p-5 sm:p-6 rounded-3xl shadow-sm border border-white backdrop-blur-md">
+        Non devi affrontare i dubbi e le fatiche navigando a vista. Ho creato questo percorso per offrirti un affiancamento clinico continuativo e un confronto sicuro. Uno spazio dove portare le tue ansie mentre arrivano, ricevendo strategie pratiche — <strong class="text-brand-magenta">qualunque sia la tua modalità di allattamento: esclusivo o alimentazione mista con biberon.</strong>
+      </p>
+    </header>
+
+    <!-- BANNER STATUS -->
+    <section class="bg-white border-4 border-brand-orange rounded-3xl p-5 sm:p-6 my-6 text-center shadow-pop transform -rotate-1 hover:rotate-0 transition-transform">
+      <h2 class="text-lg sm:text-2xl font-extrabold text-brand-text mb-2 sm:mb-3 flex items-center justify-center gap-2">
+        <span>🚨</span> Prima sessione: SOLD OUT! 🥰
+      </h2>
+      <p class="text-sm sm:text-base text-gray-700 leading-relaxed max-w-2xl mx-auto font-medium">
+        I posti per la classe in corso si sono esauriti velocemente. Per garantire a ogni mamma una presenza clinica ed emotiva di altissima qualità, i miei percorsi mensili sono rigorosamente a numero chiuso.
+      </p>
+    </section>
+
+    <!-- PERCORSI GRID -->
+    <section class="my-10 sm:my-14">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-center text-brand-text mb-8 sm:mb-10">
+        Scegli il tuo mese di supporto 💖
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-6">
+        
+        <!-- CARD 1: VILLAGGIO -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border-4 border-brand-pink shadow-pop hover:shadow-pop-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative">
+          <div class="absolute -top-4 -right-2 sm:-right-4 bg-brand-orange text-white font-bold text-sm sm:text-base px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-md transform rotate-3 border-2 border-white">
+            Max 20 posti
+          </div>
+          <div class="flex-grow mt-2">
+            <h3 class="text-2xl font-extrabold text-brand-magenta mb-1">Nel Villaggio</h3>
+            <div class="font-bold text-brand-orange-dark text-xl mb-3">
+              89€ <span class="text-sm font-normal text-gray-500">/ mese</span>
+            </div>
+            <p class="text-sm text-gray-700 mb-5 font-medium italic">
+              "Per chi desidera normalizzare ciò che vive, confrontandosi ogni giorno in un gruppo protetto e sentendosi finalmente meno sola."
+            </p>
+            <div class="space-y-3 text-sm text-gray-700 font-medium">
+              <p class="font-bold text-brand-text mb-2 border-b-2 border-brand-bg inline-block">Cosa include:</p>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span>Incontro live di apertura + finale (3 ore totali)</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span><strong>Gruppo WhatsApp condiviso</strong> sempre attivo per tutto il mese</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span><strong>2 approfondimenti via WhatsApp:</strong> 2 sessioni dedicate di 2 ore ciascuna in cui rispondo direttamente a tutte le vostre domande in chat</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span>Materiali pratici e riepiloghi degli incontri</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t-2 border-dashed border-brand-pink/30 text-center text-brand-orange-dark font-bold text-sm">
+            🌿 ENTRA NEL VILLAGGIO — 89€
+          </div>
+        </div>
+
+        <!-- CARD 2: AL TUO FIANCO -->
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border-4 border-brand-magenta shadow-pop hover:shadow-pop-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative">
+          <div class="absolute -top-4 -right-2 sm:-right-4 bg-brand-magenta text-white font-bold text-sm sm:text-base px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-md transform -rotate-2 border-2 border-white">
+            Solo 5 posti
+          </div>
+          <div class="flex-grow mt-2">
+            <h3 class="text-2xl font-extrabold text-brand-orange-dark mb-1">Al tuo fianco</h3>
+            <div class="font-bold text-brand-magenta text-xl mb-3">
+              139€ <span class="text-sm font-normal text-gray-500">/ mese</span>
+            </div>
+            <p class="text-sm text-gray-700 mb-5 font-medium italic">
+              "Per chi ha bisogno di uno spazio intimo, un'analisi personalizzata della propria fatica e del mio occhio clinico."
+            </p>
+            <div class="space-y-3 text-sm text-gray-700 font-medium">
+              <p class="font-bold text-brand-text mb-2 border-b-2 border-brand-bg inline-block">Cosa include:</p>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span><strong>4 incontri live</strong> da 90 minuti (1 a settimana)</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span>Analisi clinica profonda (es. dolore al seno, percezione poco latte, ragadi, rifiuto del seno, o slattamento)</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span><strong>Gruppo WhatsApp dedicato piccolissimo</strong> con accesso diretto a me</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="mt-0.5">✅</span>
+                <span>Strategie personalizzate e sostegno passo dopo passo</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t-2 border-dashed border-brand-pink/30 text-center text-brand-magenta font-bold text-sm">
+            🌱 ENTRA IN AL TUO FIANCO — 139€
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-2xl border-4 border-white my-8 sm:my-10 relative overflow-hidden">
+      <!-- Decorative circle -->
+      <div class="absolute -bottom-10 -left-10 w-32 sm:w-40 h-32 sm:h-40 bg-brand-orange rounded-full mix-blend-multiply opacity-20 filter blur-2xl pointer-events-none"></div>
+
+      <div id="mlb2-46275446" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-46275446 relative z-10">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm max-w-xl mx-auto">
+
+            <!-- FORM CONTAINER -->
+            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+
+              <div class="ml-form-embedContent mb-6 sm:mb-8 text-left">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-brand-text mb-5 leading-snug">
+                  Blocca ora il tuo posto in lista d'attesa 📝
+                </h3>
+                
+                <div class="space-y-4 text-sm text-gray-700 font-medium">
+                  
+                  <div class="bg-brand-bg p-4 sm:p-5 rounded-2xl border-2 border-brand-pink">
+                    <p class="font-bold text-brand-magenta mb-2 text-base">
+                      Perché c'è una lista d'attesa?
+                    </p>
+                    <p class="mb-3">
+                      La richiesta per i percorsi è molto alta. Avendo scelto di lavorare con gruppi a numero chiuso (Max 20 e Max 5 persone), <strong>compilando questo modulo prenoti la priorità assoluta</strong> per accedere alle prossime classi in partenza.
+                    </p>
+                    <p class="font-bold text-brand-text bg-white p-3 rounded-xl border border-brand-pink/50 inline-block w-full">
+                      ⚠️ Non c'è alcun pagamento immediato né vincolo. Pagherai la quota solo se deciderai di confermare quando attiveremo il mese insieme.
+                    </p>
+                  </div>
+
+                  <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 sm:p-5 rounded-2xl border-2 border-brand-orange">
+                    <p class="font-extrabold text-brand-orange-dark text-base flex items-center gap-2 mb-2">
+                      <span>🎁</span> IL MIO REGALO PER TE
+                    </p>
+                    <p>
+                      Iscrivendoti alla lista, riceverai subito via email l'accesso gratuito al webinar <strong class="text-brand-text">"Attacco al Seno e Biberon"</strong>. Inizia a informarti da subito mentre aspetti l'apertura delle classi! 🌸
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- MAILERLITE FORM -->
+              <form class="ml-block-form space-y-4 sm:space-y-5" action="https://assets.mailerlite.com/jsonp/1284806/forms/199421164935709937/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent space-y-4 sm:space-y-5">
+
+                  <!-- NOME -->
+                  <div class="ml-form-fieldRow">
+                    <div class="ml-field-group ml-field-name ml-validate-required">
+                      <label class="block text-sm font-bold text-brand-text mb-2">Il tuo nome</label>
+                      <input aria-label="name" aria-required="true" type="text" class="w-full bg-gray-50 text-brand-text border-2 border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-base font-medium focus:outline-none focus:ring-4 focus:ring-brand-pink/30 focus:border-brand-pink transition-all" name="fields[name]" placeholder="Inserisci il tuo nome" autocomplete="given-name" required>
+                    </div>
+                  </div>
+
+                  <!-- EMAIL -->
+                  <div class="ml-form-fieldRow">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <label class="block text-sm font-bold text-brand-text mb-2">La tua mail</label>
+                      <input aria-label="email" aria-required="true" type="email" class="w-full bg-gray-50 text-brand-text border-2 border-gray-200 rounded-xl px-4 py-3 sm:py-3.5 text-base font-medium focus:outline-none focus:ring-4 focus:ring-brand-pink/30 focus:border-brand-pink transition-all" name="fields[email]" placeholder="Dove vuoi ricevere il webinar regalo?" autocomplete="email" required>
+                    </div>
+                  </div>
+
+                  <!-- SELEZIONE PERCORSO -->
+                  <div class="ml-form-fieldRow ml-last-item pt-2 sm:pt-4">
+                    <div class="ml-field-group ml-field-last_name ml-validate-required">
+                      <label class="block text-sm font-bold text-brand-text mb-3">A quale percorso sei più interessata?</label>
+                      
+                      <div class="space-y-3">
+                        
+                        <!-- Radio 1 -->
+                        <div class="relative">
+                          <input aria-label="last_name" aria-required="true" name="fields[last_name]" class="radio-card-input sr-only" type="radio" value="Gruppo Nel Villaggio - 89€ (Max 20 posti)" id="radio-46275446-23-0" required>
+                          <label for="radio-46275446-23-0" class="radio-card-label block p-3 sm:p-4 rounded-xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-pink">
+                            <div class="flex items-center gap-3">
+                              <div class="min-w-[20px] h-[20px] rounded-full border-2 border-gray-300 flex items-center justify-center transition-colors">
+                                <div class="w-2.5 h-2.5 rounded-full bg-brand-magenta hidden"></div>
+                              </div>
+                              <span class="text-sm font-medium text-brand-text leading-tight">
+                                <strong class="text-brand-magenta font-bold block sm:inline">Gruppo "Nel Villaggio"</strong> 
+                                <span class="text-gray-500 sm:text-brand-text text-xs sm:text-sm">(Max 20 posti)</span>
+                              </span>
+                            </div>
+                          </label>
+                        </div>
+
+                        <!-- Radio 2 -->
+                        <div class="relative">
+                          <input aria-label="last_name" aria-required="true" name="fields[last_name]" class="radio-card-input sr-only" type="radio" value="Gruppo Al tuo fianco - 139€ (Max 5 posti)" id="radio-46275446-23-1">
+                          <label for="radio-46275446-23-1" class="radio-card-label block p-3 sm:p-4 rounded-xl border-2 border-gray-200 bg-white cursor-pointer hover:border-brand-orange-dark">
+                            <div class="flex items-center gap-3">
+                              <div class="min-w-[20px] h-[20px] rounded-full border-2 border-gray-300 flex items-center justify-center transition-colors">
+                                <div class="w-2.5 h-2.5 rounded-full bg-brand-magenta hidden"></div>
+                              </div>
+                              <span class="text-sm font-medium text-brand-text leading-tight">
+                                <strong class="text-brand-orange-dark font-bold block sm:inline">Gruppo "Al tuo fianco"</strong> 
+                                <span class="text-gray-500 sm:text-brand-text text-xs sm:text-sm">(Max 5 posti)</span>
+                              </span>
+                            </div>
+                          </label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <input type="hidden" name="ml-submit" value="1">
+
+                <!-- SUBMIT BUTTON -->
+                <div class="ml-form-embedSubmit pt-4 sm:pt-6">
+                  <button type="submit" class="primary w-full bg-brand-magenta hover:bg-pink-700 text-white font-extrabold text-sm sm:text-base py-4 px-4 sm:px-6 rounded-2xl shadow-btn hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] cursor-pointer tracking-wide uppercase leading-snug">
+                    👉 Prenota la priorità e sblocca il regalo
+                  </button>
+                  <button disabled="disabled" style="display: none;" type="button" class="loading w-full bg-gray-400 text-white font-bold py-4 rounded-2xl cursor-not-allowed">
+                    <div class="ml-form-embedSubmitLoad mx-auto"></div>
+                    <span class="sr-only">Caricamento in corso...</span>
+                  </button>
+                </div>
+
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+
+            <!-- SCHERMATA DI SUCCESSO MAILERLITE -->
+            <div class="ml-form-successBody row-success text-center py-6 sm:py-8 space-y-4 sm:space-y-5" style="display: none">
+              <div class="ml-form-successContent">
+                <div class="w-16 sm:w-20 h-16 sm:h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto text-3xl sm:text-4xl mb-4 shadow-sm border-4 border-white">
+                  ✨
+                </div>
+                <h4 class="text-2xl sm:text-3xl font-extrabold text-brand-text mb-2">CI SEI!</h4>
+                <p class="text-base sm:text-lg font-bold text-brand-magenta mb-4 sm:mb-6">
+                  Candidatura registrata con successo! 🥰
+                </p>
+                <div class="bg-brand-bg p-5 sm:p-6 rounded-3xl border-2 border-brand-pink text-left space-y-3 sm:space-y-4 text-sm text-gray-700 font-medium">
+                  <p class="font-bold text-brand-text text-sm sm:text-base">
+                    Il tuo posto in lista d'attesa prioritaria è al sicuro. Non devi pagare nulla ora.
+                  </p>
+                  <p>
+                    📩 <strong>Controlla subito la tua casella email:</strong> ti ho appena inviato il link diretto per guardare il tuo webinar in regalo <strong>"Attacco al Seno e Biberon"</strong>.
+                  </p>
+                  <p class="text-xs text-gray-500 italic">
+                    (Se non la vedi nei prossimi 2 minuti, controlla la cartella Promozioni o Spam!)
+                  </p>
+                </div>
+                <p class="pt-4 sm:pt-6 text-brand-text font-bold text-sm sm:text-base">
+                  A prestissimo,<br><span class="text-lg sm:text-xl text-brand-orange-dark font-extrabold mt-1 inline-block">Anne</span>
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center pt-6 pb-10 flex flex-col items-center justify-center">
+      <!-- Immagine Logo Tonda e Cliccabile -->
+      <a href="https://www.ossitocinalibera.it" target="_blank" class="block hover:scale-105 transition-transform mb-3 sm:mb-4">
+        <img 
+          src="https://i.postimg.cc/nzR3Krs3/foto-logo.jpg" 
+          alt="Logo Ossitocina Libera" 
+          class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-white shadow-pop"
+        />
+      </a>
+      
+      <p class="text-xs sm:text-sm font-bold text-brand-text mb-1">
+        &copy; 2026 Ossitocina Libera
+      </p>
+      <p class="text-[11px] sm:text-xs text-gray-600 font-medium mb-2 sm:mb-3">
+        Annelisa Brunelli — IBCLC & Puericultrice
+      </p>
+      
+      <a href="https://www.ossitocinalibera.it" target="_blank" class="text-xs sm:text-base text-brand-magenta font-bold hover:text-brand-orange transition-colors underline decoration-2 underline-offset-4">
+        www.ossitocinalibera.it
+      </a>
+    </footer>
+
+  </div>
+
+  <!-- MailerLite Logic -->
+  <script>
+    function ml_webform_success_46275446() {
+      var $ = ml_jQuery || jQuery;
+      $('.ml-subscribe-form-46275446 .row-success').show();
+      $('.ml-subscribe-form-46275446 .row-form').hide();
+    }
+
+    // Radio selection visual dot toggle logic
+    document.addEventListener('DOMContentLoaded', function() {
+      const radios = document.querySelectorAll('.radio-card-input');
+      radios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          document.querySelectorAll('.radio-card-input').forEach(r => {
+            const dot = r.parentElement.querySelector('.bg-brand-magenta');
+            const box = r.parentElement.querySelector('.border-gray-300, .border-brand-magenta');
+            if (r.checked) {
+              if (dot) dot.classList.remove('hidden');
+              if (box) {
+                box.classList.remove('border-gray-300');
+                box.classList.add('border-brand-magenta');
+              }
+            } else {
+              if (dot) dot.classList.add('hidden');
+              if (box) {
+                box.classList.remove('border-brand-magenta');
+                box.classList.add('border-gray-300');
+              }
+            }
+          });
+        });
+      });
+    });
+  </script>
+  <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+  <script>
+    fetch("https://assets.mailerlite.com/jsonp/1284806/forms/199421164935709937/takel")
+  </script>
+</body>
+</html>
