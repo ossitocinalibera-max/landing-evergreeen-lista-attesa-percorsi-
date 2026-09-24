@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista d'Attesa Percorsi | Ossitocina Libera</title>
   
-  <!-- Google Fonts: Lexend (altissima leggibilità) -->
+  <!-- Google Fonts: Lexend (altissima leggibilità, ottima per dislessia) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,11 +18,11 @@
       theme: {
         extend: {
           colors: {
-            'brand-bg': '#feeaeb',
-            'brand-pink': '#f9b4c7',
-            'brand-magenta': '#f60094',
-            'brand-orange': '#ffb010',
-            'brand-orange-dark': '#f19821',
+            'brand-bg': '#feeaeb',      /* Rosa chiarissimo brand */
+            'brand-pink': '#f9b4c7',    /* Rosa brand */
+            'brand-magenta': '#f60094', /* Magenta brand */
+            'brand-orange': '#ffb010',  /* Giallo/Arancio chiaro brand */
+            'brand-orange-dark': '#f19821', /* Arancio scuro brand */
             'brand-text': '#2d2d2d',
             'brand-white': '#ffffff'
           },
@@ -36,16 +36,11 @@
           },
           animation: {
             'wiggle-slow': 'wiggle 3s ease-in-out infinite',
-            'float': 'float 8s ease-in-out infinite',
           },
           keyframes: {
             wiggle: {
               '0%, 100%': { transform: 'rotate(-2deg)' },
               '50%': { transform: 'rotate(2deg)' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0) scale(1)' },
-              '50%': { transform: 'translateY(-15px) scale(1.02)' },
             }
           }
         }
@@ -55,8 +50,8 @@
 
   <style type="text/css">
     body {
-      /* Sfondo solido molto morbido, niente pois */
-      background-color: #fdf5f6;
+      /* Sfondo base leggermente rosato per amalgamare i colori */
+      background-color: #fcf0f2; 
       color: #2d2d2d;
     }
 
@@ -94,14 +89,27 @@
 
 <body class="min-h-screen py-6 sm:py-8 px-4 sm:px-6 antialiased relative overflow-x-hidden">
 
-  <!-- Sfondo morbido stile Aurora: forme grandi, lentissime e molto sfocate -->
-  <div class="fixed top-[-10%] left-[-10%] w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] bg-brand-pink rounded-full mix-blend-multiply filter blur-[80px] sm:blur-[120px] opacity-30 animate-float -z-10 pointer-events-none"></div>
-  <div class="fixed bottom-[-10%] right-[-10%] w-[80vw] h-[80vw] max-w-[700px] max-h-[700px] bg-brand-orange rounded-full mix-blend-multiply filter blur-[100px] sm:blur-[150px] opacity-15 animate-float -z-10 pointer-events-none" style="animation-delay: 3s;"></div>
+  <!-- MACCHIE DI COLORE VETTORIALI (DEFINITE, NON SFOCATE) -->
+  <!-- Macchia Gialla in alto a sinistra -->
+  <svg class="fixed top-[-5%] left-[-10%] w-[60vw] max-w-[500px] text-brand-orange opacity-20 -z-10" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,80.1,-46.1C88.4,-33.1,92.1,-16.5,89.5,-1.4C86.9,13.7,78.1,27.4,68.2,39.6C58.3,51.8,47.4,62.4,34,70.5C20.6,78.6,4.8,84.1,-10.1,81.4C-25,78.7,-38.8,67.7,-51.1,55.8C-63.4,43.9,-74.2,31.1,-79.8,16.2C-85.4,1.3,-85.7,-15.7,-79.2,-29.9C-72.7,-44.1,-59.4,-55.5,-45.3,-62.7C-31.2,-69.9,-15.6,-72.9,0.7,-74C17.1,-75.1,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100) scale(1.1)" />
+  </svg>
+  
+  <!-- Macchia Magenta a destra al centro -->
+  <svg class="fixed top-[30%] right-[-15%] w-[50vw] max-w-[400px] text-brand-magenta opacity-[0.08] -z-10" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M51.9,-71.4C66.8,-61.8,77.9,-46.5,83.5,-30.2C89.1,-13.9,89.1,3.4,83.1,18.8C77.1,34.2,65.1,47.6,50.7,57.1C36.3,66.6,19.5,72.1,3.2,67.7C-13.1,63.3,-28.9,48.9,-44.6,37.3C-60.3,25.7,-75.9,16.9,-81.9,4.4C-87.9,-8.1,-84.3,-24.3,-74.2,-36.5C-64.1,-48.7,-47.5,-56.9,-32.1,-65.9C-16.7,-74.9,-2.5,-84.7,12.7,-81.1C27.9,-77.5,41.9,-60.5,51.9,-71.4Z" transform="translate(100 100) rotate(45) scale(1.2)" />
+  </svg>
+
+  <!-- Macchia Rosa in basso a sinistra -->
+  <svg class="fixed bottom-[-10%] left-[-5%] w-[70vw] max-w-[600px] text-brand-pink opacity-40 -z-10" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M38.1,-58.5C52.4,-50.2,69.1,-44.3,75.1,-32.4C81.1,-20.5,76.4,-2.6,71.2,14.3C66,31.2,60.3,47.1,49.2,58.8C38.1,70.5,21.6,78.1,4.7,71.7C-12.2,65.3,-28.8,44.9,-42.2,30.3C-55.6,15.7,-65.8,6.9,-68.8,-4.1C-71.8,-15.1,-67.6,-28.3,-58.4,-38.3C-49.2,-48.3,-35.1,-55,-22.1,-61.7C-9.1,-68.4,23.8,-66.8,38.1,-58.5Z" transform="translate(100 100) rotate(-30) scale(1.1)" />
+  </svg>
+  <!-- FINE MACCHIE VETTORIALI -->
 
   <div class="max-w-3xl mx-auto relative z-10">
     
     <!-- HEADER / HERO -->
-    <header class="text-center pt-6 sm:pt-8 pb-8 sm:pb-10">
+    <header class="text-center pt-4 sm:pt-6 pb-8 sm:pb-10">
       <div class="inline-block p-2 px-4 sm:px-5 rounded-2xl bg-white text-brand-magenta font-bold text-xs sm:text-sm tracking-wider uppercase mb-6 shadow-pop border-2 border-brand-pink animate-wiggle-slow">
         ✨ Ossitocina Libera • Percorso Mensile
       </div>
@@ -120,7 +128,7 @@
         Smetti di sentirti sola.<br>
         <span class="text-brand-magenta">Ritrova sicurezza.</span>
       </h1>
-      <p class="text-base sm:text-lg font-medium text-gray-700 leading-relaxed max-w-2xl mx-auto bg-white/90 p-5 sm:p-6 rounded-3xl shadow-sm border border-white backdrop-blur-md">
+      <p class="text-base sm:text-lg font-medium text-gray-700 leading-relaxed max-w-2xl mx-auto bg-white/95 p-5 sm:p-6 rounded-3xl shadow-sm border border-brand-pink/30">
         Non devi affrontare i dubbi e le fatiche navigando a vista. Ho creato questo percorso per offrirti un affiancamento clinico continuativo e un confronto sicuro. Uno spazio dove portare le tue ansie mentre arrivano, ricevendo strategie pratiche — <strong class="text-brand-magenta">qualunque sia la tua modalità di allattamento: esclusivo o alimentazione mista con biberon.</strong>
       </p>
     </header>
@@ -176,9 +184,10 @@
               </div>
             </div>
           </div>
-          <div class="mt-6 pt-4 border-t-2 border-dashed border-brand-pink/30 text-center text-brand-orange-dark font-bold text-sm">
+          <!-- BOTTONE CLICCABILE (Scroll al form) -->
+          <button onclick="scrollToForm('radio-46275446-23-0')" class="w-full mt-6 pt-4 border-t-2 border-dashed border-brand-pink/50 text-center text-brand-orange-dark font-extrabold text-sm hover:scale-105 transition-transform cursor-pointer">
             🌿 ENTRA NEL VILLAGGIO — 89€
-          </div>
+          </button>
         </div>
 
         <!-- CARD 2: AL TUO FIANCO -->
@@ -214,18 +223,17 @@
               </div>
             </div>
           </div>
-          <div class="mt-6 pt-4 border-t-2 border-dashed border-brand-pink/30 text-center text-brand-magenta font-bold text-sm">
+          <!-- BOTTONE CLICCABILE (Scroll al form) -->
+          <button onclick="scrollToForm('radio-46275446-23-1')" class="w-full mt-6 pt-4 border-t-2 border-dashed border-brand-pink/50 text-center text-brand-magenta font-extrabold text-sm hover:scale-105 transition-transform cursor-pointer">
             🌱 ENTRA IN AL TUO FIANCO — 139€
-          </div>
+          </button>
         </div>
 
       </div>
     </section>
 
-    <!-- FORM SECTION -->
-    <section class="bg-white rounded-3xl p-5 sm:p-10 shadow-2xl border-4 border-white my-8 sm:my-10 relative overflow-hidden">
-      <!-- Decorative circle -->
-      <div class="absolute -bottom-10 -left-10 w-32 sm:w-40 h-32 sm:h-40 bg-brand-orange rounded-full mix-blend-multiply opacity-20 filter blur-2xl pointer-events-none"></div>
+    <!-- FORM SECTION con ID per lo scroll -->
+    <section id="modulo-iscrizione" class="bg-white rounded-3xl p-5 sm:p-10 shadow-xl border-4 border-brand-pink/20 my-8 sm:my-10 relative overflow-hidden">
 
       <div id="mlb2-46275446" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-46275446 relative z-10">
         <div class="ml-form-align-center">
@@ -241,7 +249,7 @@
                 
                 <div class="space-y-4 text-sm text-gray-700 font-medium">
                   
-                  <div class="bg-brand-bg p-4 sm:p-5 rounded-2xl border-2 border-brand-pink">
+                  <div class="bg-[#fff0f3] p-4 sm:p-5 rounded-2xl border-2 border-brand-pink">
                     <p class="font-bold text-brand-magenta mb-2 text-base">
                       Perché c'è una lista d'attesa?
                     </p>
@@ -356,7 +364,7 @@
                 <p class="text-base sm:text-lg font-bold text-brand-magenta mb-4 sm:mb-6">
                   Candidatura registrata con successo! 🥰
                 </p>
-                <div class="bg-brand-bg p-5 sm:p-6 rounded-3xl border-2 border-brand-pink text-left space-y-3 sm:space-y-4 text-sm text-gray-700 font-medium">
+                <div class="bg-[#fff0f3] p-5 sm:p-6 rounded-3xl border-2 border-brand-pink text-left space-y-3 sm:space-y-4 text-sm text-gray-700 font-medium">
                   <p class="font-bold text-brand-text text-sm sm:text-base">
                     Il tuo posto in lista d'attesa prioritaria è al sicuro. Non devi pagare nulla ora.
                   </p>
@@ -403,15 +411,32 @@
 
   </div>
 
-  <!-- MailerLite Logic -->
+  <!-- Script Custom e MailerLite -->
   <script>
+    // Funzione per scrollare e autoselezionare il percorso
+    function scrollToForm(radioId) {
+      const formSection = document.getElementById('modulo-iscrizione');
+      const radioInput = document.getElementById(radioId);
+      
+      // Seleziona il radio button
+      if (radioInput) {
+        radioInput.checked = true;
+        // Simula il click per attivare il pallino colorato
+        radioInput.dispatchEvent(new Event('change'));
+      }
+      
+      // Scrolla morbidamente al form
+      formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Successo MailerLite
     function ml_webform_success_46275446() {
       var $ = ml_jQuery || jQuery;
       $('.ml-subscribe-form-46275446 .row-success').show();
       $('.ml-subscribe-form-46275446 .row-form').hide();
     }
 
-    // Radio selection visual dot toggle logic
+    // Gestione visiva pallini radio buttons
     document.addEventListener('DOMContentLoaded', function() {
       const radios = document.querySelectorAll('.radio-card-input');
       radios.forEach(radio => {
